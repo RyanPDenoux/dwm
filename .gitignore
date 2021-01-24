@@ -1,0 +1,6 @@
+dwm
+dwm.o
+tags
+
+*.orig
+*.rej

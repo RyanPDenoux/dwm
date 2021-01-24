@@ -1,13 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
+/* constants */
+#define TERMINAL "st"
+
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;       /* gaps between windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 16;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 16;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 16;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 16;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappov    = 32;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -35,6 +38,7 @@ static const Rule rules[] = {
 	/* class              instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",             NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",          NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "signal-desktop",   NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Brave-browser",    NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
@@ -89,12 +93,15 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_grave,  spawn,          SHCMD("dmenuunicode") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,                       XK_z,      incrgaps,       {.i = +1 } },
 	{ MODKEY,                       XK_x,      incrgaps,       {.i = -1 } },
 	{ MODKEY,                       XK_a,      togglegaps,     {0} },
@@ -136,6 +143,17 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioMute,          spawn,     SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,   spawn,     SHCMD("pamixer -i 2; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,   spawn,     SHCMD("pamixer -d 2; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioPrev,          spawn,     SHCMD("mpc prev") },
+	{ 0, XF86XK_AudioNext,          spawn,     SHCMD("mpc next") },
+	{ 0, XF86XK_AudioPause,         spawn,     SHCMD("mpc pause") },
+	{ 0, XF86XK_AudioPlay,          spawn,     SHCMD("mpc play") },
+	{ 0, XF86XK_AudioStop,          spawn,     SHCMD("mpc stop") },
+	{ 0, XF86XK_AudioRewind,        spawn,     SHCMD("mpc seek -10") },
+	{ 0, XF86XK_AudioForward,       spawn,     SHCMD("mpc seek +10") },
+	{ 0, XF86XK_AudioMedia,         spawn,     SHCMD(TERMINAL " -e ncmpcpp") },
+	{ 0, XF86XK_AudioMicMute,       spawn,     SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XF86XK_MonBrightnessUp,    spawn,     SHCMD("xbacklight -inc 15") },
+	{ 0, XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -dec 15") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
