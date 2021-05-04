@@ -14,8 +14,8 @@ static const unsigned int gappov    = 32;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "Hack-Regular:size=12" };
+static const char dmenufont[]       = "Hack-Regular:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -38,8 +38,9 @@ static const Rule rules[] = {
 	/* class              instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",             NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",          NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "signal-desktop",   NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Brave-browser",    NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Signal",           NULL,       NULL,       1 << 1,       0,           -1 },
+	{ NULL,               NULL,       "neomutt",  1 << 2,       0,           -1 },
 };
 
 /* layout(s) */
@@ -152,8 +153,8 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioForward,       spawn,     SHCMD("mpc seek +10") },
 	{ 0, XF86XK_AudioMedia,         spawn,     SHCMD(TERMINAL " -e ncmpcpp") },
 	{ 0, XF86XK_AudioMicMute,       spawn,     SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
-	{ 0, XF86XK_MonBrightnessUp,    spawn,     SHCMD("xbacklight -inc 15") },
-	{ 0, XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -dec 15") },
+	{ 0, XF86XK_MonBrightnessUp,    spawn,     SHCMD("xbacklight -inc 10") },
+	{ 0, XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -dec 10") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
