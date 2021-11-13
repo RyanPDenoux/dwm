@@ -1,5 +1,5 @@
 dwm
-dwm.o
+*.o
 tags
 
 *.orig
