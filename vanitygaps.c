@@ -364,6 +364,13 @@ centeredmaster(Monitor *m)
 			}
 		}
 	}
+
+	if (n == 1 && selmon->sel->CenterThisWindow)
+		resizeclient(selmon->sel,
+			(selmon->mw - selmon->mw * 0.5) / 2,
+			(selmon->mh - selmon->mh * 0.95) / 2,
+			selmon->mw * 0.5,
+			selmon->mh * 0.95);
 }
 
 void
@@ -417,6 +424,13 @@ centeredfloatingmaster(Monitor *m)
 			resize(c, sx, sy, (sw / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), sh - (2*c->bw), 0);
 			sx += WIDTH(c) + iv;
 		}
+
+	if (n == 1 && selmon->sel->CenterThisWindow)
+		resizeclient(selmon->sel,
+			(selmon->mw - selmon->mw * 0.5) / 2,
+			(selmon->mh - selmon->mh * 0.95) / 2,
+			selmon->mw * 0.5,
+			selmon->mh * 0.95);
 }
 
 /*
@@ -808,9 +822,9 @@ tile(Monitor *m)
 		}
 
 	if (n == 1 && selmon->sel->CenterThisWindow)
-        resizeclient(selmon->sel,
-                (selmon->mw - selmon->mw * 0.5) / 2,
-                (selmon->mh - selmon->mh * 0.5) / 2,
-                selmon->mw * 0.5,
-                selmon->mh * 0.5);
+		resizeclient(selmon->sel,
+			(selmon->mw - selmon->mw * 0.5) / 2,
+			(selmon->mh - selmon->mh * 0.95) / 2,
+			selmon->mw * 0.5,
+			selmon->mh * 0.95);
 }

@@ -46,15 +46,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class              instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",             NULL,       NULL,       1 << 3,       1,           -1 },
-	{ "Firefox",          NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Brave-browser",    NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Signal",           NULL,       NULL,       1 << 1,       0,           -1 },
-	{ "libreoffice-writer",NULL,      NULL,       1 << 6,       0,           -1 },
-	{ "webplayer-pocketcasts-nativefier-7a5499",NULL,NULL,1 << 5,0,          -1 },
-	{ NULL,               NULL,       "neomutt",  1 << 2,       0,           -1 },
-	{ NULL,               NULL,       "calcurse", 1 << 2,       0,           -1 },
+	/* class      	     instance    title    tags mask     isfloating   CenterThisWindow?     monitor */
+	{ "Alacritty",       NULL,       NULL,    0,            0,     	     1,		           -1 },
+	{ "Gimp",            NULL,       NULL,    1 << 3,       1,           0,                    -1 },
+	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,                    -1 },
+	{ "Brave-browser",   NULL,       NULL,    1 << 8,       0,           0,                    -1 },
+	{ "Signal",          NULL,       NULL,    1 << 1,       0,           1,                    -1 },
+	{ "libreoffice-wrtier", NULL,    NULL,    1 << 6,       0,           0,                    -1 },
+	{ "webplayer-pocketcasts-nativefier-7a5499", NULL, NULL, 1 << 5, 0,  0,                    -1 },
+	{ NULL,              NULL,       "neomutt", 1 << 2,     0,           1,                    -1 },
+	{ NULL,              NULL,       "calcurse", 1 << 2,    0,           1,                    -1 },
 };
 
 /* layout(s) */
