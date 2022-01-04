@@ -15,8 +15,8 @@ static const unsigned int gappov    = 16;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Hack-Regular:size=12" };
-static const char dmenufont[]       = "Hack-Regular:size=12";
+static const char *fonts[]          = { "Hack:size=12", "Noto Color Emoji:size=12" };
+static const char dmenufont[]       = "Hack:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
