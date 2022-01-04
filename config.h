@@ -1,12 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 
 /* constants */
-#define TERMINAL "st"
+#define TERMINAL "alacritty"
 #define BROWSER "brave"
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 16;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 16;       /* vert inner gap between windows */
@@ -30,15 +29,15 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = {
-	"💽",
-	"💬",
-	"📨",
-	"📷",
-	"🛸",
-	"🎶",
-	"📄",
-	"🔤",
-	"🌐"
+	"💽 code",
+	"💬 chats",
+	"📨 mail",
+	"📷 photos",
+	"☁️ cloud",
+	"🎶 music",
+	"📄 docs",
+	"🔤 translate",
+	"🌐 web"
 };
 
 static const Rule rules[] = {
@@ -62,6 +61,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -69,19 +69,20 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
-	{ "TTT",      bstack },
+	{ "[M]",      monocle },
 	{ "[@]",      spiral },
 	{ "[\\]",     dwindle },
 	{ "H[]",      deck },
-	{ "[M]",      monocle },
-//	{ "===",      bstackhoriz },
-//	{ "HHH",      grid },
-//	{ "###",      nrowgrid },
-//	{ "---",      horizgrid },
-//	{ ":::",      gaplessgrid },
+	{ "TTT",      bstack },
+	/* { "===",      bstackhoriz }, */
+	/* { "HHH",      grid }, */
+	/* { "###",      nrowgrid }, */
+	/* { "---",      horizgrid }, */
+	/* { ":::",      gaplessgrid }, */
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -98,8 +99,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *passmenucmd[] = { "passmenu", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *passmenucmd[]  = { "passmenu", NULL };
 
 #include <X11/XF86keysym.h>
 
@@ -109,7 +110,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  spawn,          SHCMD("dmenuunicode") },
-	{ MODKEY,                       XK_w,	   spawn,          SHCMD(BROWSER) },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD(BROWSER) },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -123,7 +124,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_x,      incrgaps,       {.i = -1 } },
 	{ MODKEY,                       XK_a,      togglegaps,     {0} },
 	{ MODKEY|ShiftMask,             XK_a,      defaultgaps,    {0} },
-/*
 	{ MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
@@ -136,7 +136,6 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-*/
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -155,26 +154,24 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_space,  spawn,	   SHCMD("toggle-keymap; kill -64 $(pidof dwmblocks)") },
-/*	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
-	{ 0,				XK_Print,  spawn,	   SHCMD("screengrab") },
-	{ 0|ShiftMask,             	XK_Print,  spawn,	   SHCMD("windowgrab") },
-	{ 0, 				XF86XK_AudioMute,          spawn,     SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ 0, 				XF86XK_AudioRaiseVolume,   spawn,     SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
-	{ 0, 				XF86XK_AudioLowerVolume,   spawn,     SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") },
-	{ 0, 				XF86XK_AudioPrev,          spawn,     SHCMD("mpc prev") },
-	{ 0, 				XF86XK_AudioNext,          spawn,     SHCMD("mpc next") },
-	{ 0, 				XF86XK_AudioPause,         spawn,     SHCMD("mpc pause") },
-	{ 0, 				XF86XK_AudioPlay,          spawn,     SHCMD("mpc play") },
-	{ 0, 				XF86XK_AudioStop,          spawn,     SHCMD("mpc stop") },
-	{ 0, 				XF86XK_AudioRewind,        spawn,     SHCMD("mpc seek -10") },
-	{ 0, 				XF86XK_AudioForward,       spawn,     SHCMD("mpc seek +10") },
-	{ 0, 				XF86XK_AudioMedia,         spawn,     SHCMD(TERMINAL " -e ncmpcpp") },
-	{ 0, 				XF86XK_AudioMicMute,       spawn,     SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
-/*	{ 0, 				XF86XK_MonBrightnessUp,    spawn,     SHCMD("xbacklight -inc 10") },*/
-/*	{ 0, 				XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -dec 10") },*/
-	{ 0, 				XF86XK_MonBrightnessUp,    spawn,     SHCMD("brightnessctl set 10%+") },
-	{ 0, 				XF86XK_MonBrightnessDown,  spawn,     SHCMD("brightnessctl set 10%-") },
+	{ MODKEY,                       XK_space,  spawn,          SHCMD("toggle-keymap; kill -64 $(pidof dwmblocks)") },
+	/* { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, */
+	{ 0,                            XK_Print,  spawn,          SHCMD("screengrab") },
+	{ 0|ShiftMask,                  XK_Print,  spawn,          SHCMD("windowgrab") },
+	{ 0,                            XF86XK_AudioMute, spawn,   SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") },
+	{ 0,                            XF86XK_AudioPrev, spawn,   SHCMD("mpc prev") },
+	{ 0,                            XF86XK_AudioNext, spawn,   SHCMD("mpc next") },
+	{ 0,                            XF86XK_AudioPause, spawn,  SHCMD("mpc pause") },
+	{ 0,                            XF86XK_AudioPlay, spawn,   SHCMD("mpc play") },
+	{ 0,                            XF86XK_AudioStop, spawn,   SHCMD("mpc stop") },
+	{ 0,                            XF86XK_AudioRewind, spawn, SHCMD("mpc seek -10") },
+	{ 0,                            XF86XK_AudioForward, spawn, SHCMD("mpc seek +10") },
+	{ 0,                            XF86XK_AudioMedia, spawn,  SHCMD(TERMINAL " -e ncmpcpp") },
+	{ 0,                            XF86XK_AudioMicMute, spawn, SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0,                            XF86XK_MonBrightnessUp, spawn, SHCMD("brightnessctl set 10%+") },
+	{ 0,                            XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl set 10%-") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -199,7 +196,7 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
 	{ ClkStatusText,        0,              Button4,        sigdwmblocks,   {.i = 4} },
 	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
-	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
+	{ ClkStatusText,        ControlMask,    Button1,        sigdwmblocks,   {.i = 6} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
@@ -208,4 +205,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
