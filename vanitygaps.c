@@ -367,10 +367,10 @@ centeredmaster(Monitor *m)
 
 	if (n == 1 && selmon->sel->CenterThisWindow)
 		resizeclient(selmon->sel,
-			(selmon->mw - selmon->mw * 0.5) / 2,
-			(selmon->mh - selmon->mh * 0.95) / 2,
-			selmon->mw * 0.5,
-			selmon->mh * 0.95);
+			(selmon->mw - selmon->mw * selmon->mfact) / 2,
+			(selmon->wy + oh),
+			selmon->mw * selmon->mfact,
+			mh);
 }
 
 void
@@ -427,10 +427,10 @@ centeredfloatingmaster(Monitor *m)
 
 	if (n == 1 && selmon->sel->CenterThisWindow)
 		resizeclient(selmon->sel,
-			(selmon->mw - selmon->mw * 0.5) / 2,
-			(selmon->mh - selmon->mh * 0.95) / 2,
-			selmon->mw * 0.5,
-			selmon->mh * 0.95);
+			(selmon->mw - selmon->mw * selmon->mfact) / 2,
+			selmon->wy + (selmon->wh - mh + 2*oh) / 2,
+			selmon->ww * m->mfact - iv * mivf,
+			selmon->wh * 0.9);
 }
 
 /*
@@ -821,10 +821,12 @@ tile(Monitor *m)
 			sy += HEIGHT(c) + ih;
 		}
 
+	/* Center clients based on mfact when specified in rules */
 	if (n == 1 && selmon->sel->CenterThisWindow)
 		resizeclient(selmon->sel,
-			(selmon->mw - selmon->mw * 0.5) / 2,
-			(selmon->mh - selmon->mh * 0.95) / 2,
-			selmon->mw * 0.5,
-			selmon->mh * 0.95);
+			(selmon->mw - selmon->mw * selmon->mfact) / 2,
+			selmon->wy + oh,
+			selmon->mw * selmon->mfact,
+			mh);
+
 }
