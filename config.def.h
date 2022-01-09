@@ -4,6 +4,7 @@
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int gappx     = 5;        /* gaps between windows */
 static unsigned int snap      = 32;       /* snap pixel */
+static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -34,10 +35,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      	     instance    title    tags mask     isfloating   CenterThisWindow?     monitor */
-	{ "st",              NULL,       NULL,    0,            0,     	     1,		           -1 },
-	{ "Gimp",            NULL,       NULL,    0,            1,           0,                    -1 },
-	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,                    -1 },
+	/* class      	     instance    title    tags mask     isfloating   isterminal  noswallow  CenterThisWindow?     monitor */
+	{ "St",              NULL,       NULL,    0,            0,     	     1,          0,         1,		              -1 },
+	{ NULL,              NULL,       "Event Tester", 0,     0,     	     0,          1,         1,		              -1 },
+	{ "Gimp",            NULL,       NULL,    0,            1,           0,          0,         0,                    -1 },
+	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,          -1,        0,                    -1 },
 };
 
 /* layout(s) */
@@ -47,7 +49,6 @@ static int resizehints = 1;    /* 1 means respect size hints in tiled resizals *
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
-#include "vanitygaps.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */

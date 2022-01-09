@@ -7,6 +7,7 @@
 /* appearance */
 static unsigned int borderpx  = 2;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
+static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static unsigned int gappih    = 16;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 16;       /* vert inner gap between windows */
 static unsigned int gappoh    = 16;       /* horiz outer gap between windows and screen edge */
@@ -47,16 +48,18 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      	     instance    title    tags mask     isfloating   CenterThisWindow?     monitor */
-	{ "Alacritty",       NULL,       NULL,    0,            0,     	     1,		           -1 },
-	{ "Gimp",            NULL,       NULL,    1 << 3,       1,           0,                    -1 },
-	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,                    -1 },
-	{ "Brave-browser",   NULL,       NULL,    1 << 8,       0,           0,                    -1 },
-	{ "Signal",          NULL,       NULL,    1 << 1,       0,           1,                    -1 },
-	{ "libreoffice-wrtier", NULL,    NULL,    1 << 6,       0,           0,                    -1 },
-	{ "webplayer-pocketcasts-nativefier-7a5499", NULL, NULL, 1 << 5, 0,  0,                    -1 },
-	{ NULL,              NULL,       "neomutt", 1 << 2,     0,           1,                    -1 },
-	{ NULL,              NULL,       "calcurse", 1 << 2,    0,           1,                    -1 },
+	/* class      	     instance    title    tags mask     isfloating   isterminal  noswallow  CenterThisWindow?     monitor */
+	{ "Alacritty",       NULL,       NULL,    0,            0,           1,          0,         1,                    -1 },
+	{ "St",              NULL,       NULL,    0,            0,           1,          0,         1,                    -1 },
+	{ "Gimp",            NULL,       NULL,    1 << 3,       1,           0,          0,         0,                    -1 },
+	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,          -1,        0,                    -1 },
+	{ "Brave-browser",   NULL,       NULL,    1 << 8,       0,           0,          -1,        0,                    -1 },
+	{ "Signal",          NULL,       NULL,    1 << 1,       0,           0,          0,         1,                    -1 },
+	{ "libreoffice-wrtier", NULL,    NULL,    1 << 6,       0,           0,          0,         0,                    -1 },
+	{ "webplayer-pocketcasts-nativefier-7a5499", NULL, NULL, 1 << 5, 0,  0,          0,         0,                    -1 },
+	{ NULL,              NULL,       "neomutt", 1 << 2,     0,           0,          0,         1,                    -1 },
+	{ NULL,              NULL,       "calcurse", 1 << 2,    0,           0,          0,         1,                    -1 },
+	{ NULL,              NULL,       "Event Tester", 0,     0,           1,          1,         1,                    -1 },
 };
 
 /* layout(s) */
