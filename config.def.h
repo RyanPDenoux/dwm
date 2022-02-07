@@ -3,6 +3,8 @@
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int gappx     = 5;        /* gaps between windows */
+static int horizpadbar        = 2;        /* horizontal padding for statusbar */
+static int vertpadbar         = 0;        /* vertical padding for statusbar */
 static unsigned int snap      = 32;       /* snap pixel */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static unsigned int gappih    = 20;       /* horiz inner gap between windows */
@@ -107,6 +109,8 @@ ResourcePref resources[] = {
 	{ "selfgcolor",         STRING,  &selfgcolor },
 	{ "borderpx",          	INTEGER, &borderpx },
 	{ "snap",          		INTEGER, &snap },
+	{ "horizpadbar",   		INTEGER, &horizpadbar },
+	{ "vertpadbar",    		INTEGER, &vertpadbar },
 	{ "showbar",          	INTEGER, &showbar },
 	{ "topbar",          	INTEGER, &topbar },
 	{ "nmaster",          	INTEGER, &nmaster },
