@@ -6,6 +6,8 @@ static unsigned int snap      = 32;       /* snap pixel */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
+static const int horizpadbar  = 2;        /* horizontal padding for statusbar */
+static const int vertpadbar   = 0;        /* vertical padding for statusbar */
 static char font[]            = "monospace:size=10";
 static char dmenufont[]       = "monospace:size=10";
 static const char *fonts[]    = { font };
