@@ -1,6 +1,7 @@
 dwm
 *.o
 tags
+*.org
 
 *.orig
 *.rej
