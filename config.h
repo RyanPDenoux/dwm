@@ -48,18 +48,26 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      	     instance    title    tags mask     isfloating   isterminal  noswallow  CenterThisWindow?     monitor */
-	{ "Alacritty",       NULL,       NULL,    0,            0,           1,          0,         1,                    -1 },
-	{ "St",              NULL,       NULL,    0,            0,           1,          0,         1,                    -1 },
-	{ "Gimp",            NULL,       NULL,    1 << 3,       1,           0,          0,         0,                    -1 },
-	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,          -1,        0,                    -1 },
-	{ "Brave-browser",   NULL,       NULL,    1 << 8,       0,           0,          -1,        0,                    -1 },
-	{ "Signal",          NULL,       NULL,    1 << 1,       0,           0,          0,         1,                    -1 },
-	{ "libreoffice-wrtier", NULL,    NULL,    1 << 6,       0,           0,          0,         0,                    -1 },
-	{ "webplayer-pocketcasts-nativefier-7a5499", NULL, NULL, 1 << 5, 0,  0,          0,         0,                    -1 },
-	{ NULL,              NULL,       "neomutt", 1 << 2,     0,           0,          0,         1,                    -1 },
-	{ NULL,              NULL,       "calcurse", 1 << 2,    0,           0,          0,         1,                    -1 },
-	{ NULL,              NULL,       "Event Tester", 0,     0,           1,          1,         1,                    -1 },
+	/* class      	     instance    title    tags mask  isfloating  isterminal  noswallow  CenterThisWindow?  monitor float x,y,w,h   floatborderpx */
+	{ "Alacritty",       NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "St",              NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "Emacs",           NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "Nextcloud","nextcloud",       NULL,    0,         1,          0,          0,         1,                 -1, 	   2700,50,500,800,  5 },
+	{ NULL,          NULL, "Event Tester",    0,         0,          1,          1,         1,                 -1, 	   50,50,500,500,  5 },
+	{ NULL,          NULL,   "pulsemixer",    0,         1,          1,          0,         0,                 -1, 	   2800,50,600,300,  5 },
+	{ "mpv",             NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "Anki",            NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "Signal",          NULL,       NULL,    1 << 1,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "discord",         NULL,       NULL,    1 << 1,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "whatsapp-nativefier-d40211", NULL, NULL, 1 << 1,  0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ NULL,              NULL,  "neomutt",    1 << 2,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ NULL,              NULL, "calcurse",    1 << 2,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "Gimp",            NULL,       NULL,    1 << 3,    1,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "spotify",         NULL,       NULL,    1 << 5,    0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "pocket-casts-linux", NULL,    NULL,    1 << 5,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "libreoffice-writer", NULL,    NULL,    1 << 6,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ NULL, NULL,       "Mozilla Firefox",    1 << 7,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
+	{ "Brave-browser",   NULL,       NULL,    1 << 8,    0,          0,          0,         1,                 -1, 	   50,50,500,500,  5 },
 };
 
 /* layout(s) */
