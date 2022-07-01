@@ -52,7 +52,7 @@ static const Rule rules[] = {
 	{ "Alacritty",       NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
 	{ "St",              NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
 	{ "Emacs",           NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
-	{ "Nextcloud","nextcloud",       NULL,    0,         1,          0,          0,         1,                 -1, 	   2700,50,500,800,  5 },
+	{ "Nextcloud","nextcloud",       NULL,    0,         1,          0,          0,         0,                 -1, 	   2700,50,500,800,  5 },
 	{ NULL,          NULL, "Event Tester",    0,         0,          1,          1,         1,                 -1, 	   50,50,500,500,  5 },
 	{ NULL,          NULL,   "pulsemixer",    0,         1,          1,          0,         0,                 -1, 	   2800,50,600,300,  5 },
 	{ "mpv",             NULL,       NULL,    0,         0,          1,          0,         1,                 -1, 	   50,50,500,500,  5 },
