@@ -15,9 +15,9 @@ static unsigned int gappov    = 16;       /* vert outer gap between windows and 
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char font[]            = "mono:size=12";
-static char dmenufont[]       = "mono:size=12";
-static const char *fonts[]    = { font , "Noto Color Emoji:size=12" };
+static char font[]            = "monospace:size=12";
+static char dmenufont[]       = "Twemoji:size=12";
+static const char *fonts[]    = { font , "Twemoji:pixelsize=12:antialias=true:autohint=true" };
 static char normbgcolor[]     = "#002b36";
 static char normbordercolor[] = "#073642";
 static char normfgcolor[]     = "#93a1a1";
