@@ -32,15 +32,15 @@ static char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = {
-	"💽 code",
-	"💬 chats",
-	"📨 mail",
-	"📷 photos",
-	"☁️ cloud",
-	"🎶 music",
-	"📄 docs",
-	"🔤 translate",
-	"🌐 web"
+	"💽",
+	"💬",
+	"📨",
+	"📷",
+	"☁️",
+	"🎶",
+	"📄",
+	"🔤",
+	"🌐"
 };
 
 static const Rule rules[] = {
