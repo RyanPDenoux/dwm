@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* constants */
-#define TERMINAL "alacritty"
+#define TERMINAL "st"
 #define BROWSER "brave"
 
 /* appearance */
