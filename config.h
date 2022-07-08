@@ -225,7 +225,7 @@ static Key keys[] = {
 	// system actions
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      spawn,          SHCMD("sysact") },
 	// desktop manipulation
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_z,      incrgaps,       {.i = +1 } },
