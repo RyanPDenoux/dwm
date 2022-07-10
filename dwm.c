@@ -391,7 +391,7 @@ applyrules(Client *c)
 	XClassHint ch = { NULL, NULL };
 
 	/* rule matching */
-	c->isfloating = 1;
+	c->isfloating = 0;
     c->CenterThisWindow = 0;
 	c->tags = 0;
 	XGetClassHint(dpy, c->win, &ch);
@@ -407,7 +407,11 @@ applyrules(Client *c)
 			c->isterminal = r->isterminal;
 			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
-			c->CenterThisWindow = r->CenterThisWindow;
+
+			/* Only apply window centering on ultrawide monitors */
+			if ((c->mon->mw / c->mon->mh) > 1)
+				c->CenterThisWindow = r->CenterThisWindow;
+
 			c->tags |= r->tags;
 			if (r->floatborderpx >= 0) {
 				c->floatborderpx = r->floatborderpx;
