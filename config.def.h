@@ -29,11 +29,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  CenterThisWindow  isterminal  noswallow  monitor */
-	{ "St",      NULL,     NULL,           0,         0,          1,                1,           0,        -1 },
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,                0,           0,        -1 },
-	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,                0,          -1,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,                0,           1,        -1 }, /* xev */
+	/* class     instance  title           tags mask  isfloating  CenterThisWindow  isterminal  noswallow  monitor  float x,y,w,h   floatborderpx */
+	{ "St",      NULL,     NULL,           0,         0,          1,                1,           0,        -1,	    50,50,500,500,  5 },
+	{ "Gimp",    NULL,     NULL,           0,         1,          0,                0,           0,        -1,	    50,50,500,500,  5 },
+	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,                0,          -1,        -1,	    50,50,500,500,  5 },
+	{ NULL,      NULL,     "Event Tester", 0,         0,          0,                0,           1,        -1,	    50,50,500,500,  5 },/* xev */
 };
 
 /* layout(s) */
