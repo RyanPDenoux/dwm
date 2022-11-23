@@ -9,7 +9,7 @@
 
 /* appearance */
 #include <X11/X.h>
-static unsigned int borderpx		 = 1;      /* border pixel of windows */
+static unsigned int borderpx		 = 2;      /* border pixel of windows */
 static unsigned int snap			 = 32;     /* snap pixel */
 static const unsigned int gappih	 = 12;	   /* horizontal inner gap between windows */
 static const unsigned int gappiv	 = 12;	   /* vertical inner gap between windows */
@@ -24,12 +24,12 @@ static const int vertpadbar			 = 8;      /* vertical padding for statusbar */
 static char font[]					 = "monospace:size=12";
 static char dmenufont[]				 = "monospace:size=12";
 static const char *fonts[]			 = { font };
-static char normbgcolor[]			 = "#222222";
-static char normbordercolor[]		 = "#444444";
-static char normfgcolor[]			 = "#bbbbbb";
-static char selfgcolor[]			 = "#eeeeee";
-static char selbordercolor[]		 = "#005577";
-static char selbgcolor[]			 = "#005577";
+static char normbgcolor[]			 = "#002b36";
+static char normbordercolor[]		 = "#073642";
+static char normfgcolor[]			 = "#93a1a1";
+static char selfgcolor[]			 = "#eee8d5";
+static char selbordercolor[]		 = "#268bd2";
+static char selbgcolor[]			 = "#268bd2";
 static char *colors[][3]			 = {
 	/*               fg           bg           border   */
 	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -37,8 +37,8 @@ static char *colors[][3]			 = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-static const int taglayouts[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+static const char *tags[] = { "💽", "💬", "📨", "📷", "☁", "🎶", "📄", "🔤", "🌐" };
+static const int taglayouts[] = { 0, 2, 0, 0, 0, 0, 0, 0, 0 };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -108,12 +108,12 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 ResourcePref resources[] = {
 		{ "font",               STRING,  &font },
 		{ "dmenufont",          STRING,  &dmenufont },
-		{ "normbgcolor",        STRING,  &normbgcolor },
-		{ "normbordercolor",    STRING,  &normbordercolor },
-		{ "normfgcolor",        STRING,  &normfgcolor },
-		{ "selbgcolor",         STRING,  &selbgcolor },
-		{ "selbordercolor",     STRING,  &selbordercolor },
-		{ "selfgcolor",         STRING,  &selfgcolor },
+		{ "color0",             STRING,  &normbgcolor },
+		{ "color0",             STRING,  &normbordercolor },
+		{ "color8",             STRING,  &normfgcolor },
+		{ "color4",             STRING,  &selbgcolor },
+		{ "color4",             STRING,  &selbordercolor },
+		{ "color0",             STRING,  &selfgcolor },
 		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
