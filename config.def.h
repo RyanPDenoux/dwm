@@ -123,20 +123,19 @@ ResourcePref resources[] = {
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
+#include <X11/XF86keysym.h>
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_o,      incnmaster,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_o,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY|Mod1Mask,              XK_1,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|Mod1Mask,              XK_2,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|Mod1Mask,              XK_3,      setlayout,      {.v = &layouts[2]} },
@@ -159,9 +158,38 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY,                       XK_t,      spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("passmenu") },
+	{ MODKEY,                       XK_grave,  spawn,          SHCMD("dmenuunicode") },
+	{ MODKEY,                       XK_s,      spawn,          SHCMD("dmenusarcastify") },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD(BROWSER) },
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
+	{ MODKEY,                       XK_f,      spawn,          SHCMD(TERMINAL " -e lfenv") },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
+	{ MODKEY|ControlMask,           XK_m,      spawn,          SHCMD(TERMINAL " -e calcurse") },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
+	{ MODKEY,                       XK_n,      spawn,          SHCMD(TERMINAL " -e newsboat-surf; pkill -RTMIN+6 dwmblocks") },
+	{ 0,                            XK_Print,  spawn,          SHCMD("screengrab") },
+	{ 0|ShiftMask,                  XK_Print,  spawn,          SHCMD("windowgrab") },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD(TERMINAL " -e $VISUAL") },
+	{ MODKEY,                       XK_c,      spawn,          SHCMD(TERMINAL " -e pulsemixer") },
+	{ 0,                            XF86XK_AudioMute, spawn,   SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") },
+	{ 0,                            XF86XK_AudioPrev, spawn,   SHCMD("playerctl previous") },
+	{ 0,                            XF86XK_AudioNext, spawn,   SHCMD("playerctl next") },
+	{ 0,                            XF86XK_AudioPause, spawn,  SHCMD("playerctl play-pause") },
+	{ 0,                            XF86XK_AudioPlay, spawn,   SHCMD("playerctl play-pause") },
+	{ 0,                            XF86XK_AudioStop, spawn,   SHCMD("playerctl stop") },
+	{ 0,                            XF86XK_AudioRewind, spawn, SHCMD("playerctl position -10") },
+	{ 0,                            XF86XK_AudioForward, spawn, SHCMD("playerctl position +10") },
+	{ 0,                            XF86XK_AudioMedia, spawn,  SHCMD(TERMINAL " -e ncmpcpp") },
+	{ 0,                            XF86XK_AudioMicMute, spawn, SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0,                            XF86XK_MonBrightnessUp, spawn, SHCMD("brightnessctl set 10%+") },
+	{ 0,                            XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl set 10%-") },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      spawn,          SHCMD("sysact") },
 };
 
 /* button definitions */
