@@ -172,6 +172,7 @@ static const Key keys[] = {
 	{ 0,                            XK_Print,  spawn,          SHCMD("screengrab") },
 	{ 0|ShiftMask,                  XK_Print,  spawn,          SHCMD("windowgrab") },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD(TERMINAL " -e $VISUAL") },
+	{ MODKEY,                       XK_v,      spawn,          SHCMD(TERMINAL " -e watch-queue") },
 	{ MODKEY,                       XK_c,      spawn,          SHCMD(TERMINAL " -e pulsemixer") },
 	{ 0,                            XF86XK_AudioMute, spawn,   SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
