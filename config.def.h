@@ -46,7 +46,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      	     instance    title    tags mask  isfloating  CenterThisWindow?  isterminal  noswallow  monitor float x,y,w,h   floatborderpx */
-	{ "St",              NULL,       NULL,    0,         0,          1,                 1,          0,         -1, 	   50,50,500,500,  5 },
+	{ "st",              NULL,       NULL,    0,         0,          1,                 1,          0,         -1, 	   50,50,500,500,  5 },
 	{ "Emacs",           NULL,       NULL,    0,         0,          1,                 1,          0,         -1, 	   50,50,500,500,  5 },
 	{ "Nextcloud",       "nextcloud",NULL,    0,         1,          0,                 0,          0,         -1, 	   2700,50,500,800,  5 },
 	{ NULL,          NULL, "Event Tester",    0,         0,          1,                 1,          1,         -1, 	   50,50,500,500,  5 },
@@ -99,7 +99,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run_history", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run_history", NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 
 /*
@@ -109,10 +109,10 @@ ResourcePref resources[] = {
 		{ "font",               STRING,  &font },
 		{ "dmenufont",          STRING,  &dmenufont },
 		{ "color0",             STRING,  &normbgcolor },
-		{ "color0",             STRING,  &normbordercolor },
-		{ "color8",             STRING,  &normfgcolor },
-		{ "color4",             STRING,  &selbgcolor },
-		{ "color4",             STRING,  &selbordercolor },
+		{ "color8",             STRING,  &normbordercolor },
+		{ "color15",             STRING,  &normfgcolor },
+		{ "color15",             STRING,  &selbgcolor },
+		{ "color6",             STRING,  &selbordercolor },
 		{ "color0",             STRING,  &selfgcolor },
 		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
@@ -159,8 +159,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY,                       XK_t,      spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("passmenu") },
+	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_r,      spawn,          SHCMD("passmenu") },
 	{ MODKEY,                       XK_grave,  spawn,          SHCMD("dmenuunicode") },
 	{ MODKEY,                       XK_s,      spawn,          SHCMD("dmenusarcastify") },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD(BROWSER) },
@@ -172,8 +172,9 @@ static const Key keys[] = {
 	{ 0,                            XK_Print,  spawn,          SHCMD("screengrab") },
 	{ 0|ShiftMask,                  XK_Print,  spawn,          SHCMD("windowgrab") },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD(TERMINAL " -e $VISUAL") },
-	{ MODKEY,                       XK_v,      spawn,          SHCMD(TERMINAL " -e watch-queue") },
+	{ MODKEY,                       XK_v,      spawn,          SHCMD("watch-queue") },
 	{ MODKEY,                       XK_c,      spawn,          SHCMD(TERMINAL " -e pulsemixer") },
+	{ MODKEY|ControlMask,           XK_space,  spawn,          SHCMD("toggle-keymap") },
 	{ 0,                            XF86XK_AudioMute, spawn,   SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") },
