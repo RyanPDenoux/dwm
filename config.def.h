@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#define SESSION_FILE "/tmp/dwm-session"
+
 /* appearance */
 #include <X11/X.h>
 static unsigned int borderpx		 = 1;      /* border pixel of windows */
