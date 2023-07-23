@@ -276,5 +276,5 @@ tile(Monitor *m)
                 (selmon->mw - selmon->mw * selmon->mfact) / 2,
                 selmon->wy + oh,
                 selmon->mw * selmon->mfact,
-                mh);
+                mh - 2 * selmon->sel->bw);
 }
